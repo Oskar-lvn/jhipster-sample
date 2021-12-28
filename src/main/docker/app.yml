@@ -26,3 +26,12 @@ services:
     ports:
       - 127.0.0.1:3306:3306
     command: mysqld --lower_case_table_names=1 --skip-ssl --character_set_server=utf8mb4 --explicit_defaults_for_timestamp
+  nginx:
+    depends_on:
+      - sampleapp-app
+    image: nginx:1.15-alpine
+    volumes:
+      # - ./../../../target/static:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 80:80
